@@ -1,0 +1,192 @@
+<?php
+
+/* =================
+ * Utility functions
+ * ================= */
+
+/**
+ * Checks if the field exists in the entity, and is not empty
+ * @param  EntityMetadataWrapper $wrapped The wrapped entity
+ * @param  String $field   Machine name of the field to check for
+ * @return Boolean         Whether or not the field name exists and has data
+ */
+function ak_utils_emw_field_check($wrapped, $field) {
+  if (isset($wrapped->$field) && $wrapped->$field->value() != '') {
+    return TRUE;
+  } else {
+    return FALSE;
+  }
+}
+
+/* ========================
+ * Installer configurations
+ * ======================== */
+
+/**
+ * An easier-to-manage list of installation profile adjustments
+ * @return array of settings for provided profile
+ */
+function _ak_utils_install_adjustments($profile) {
+/*
+  Format:
+
+  $profile_name => array(
+    'modules' => array(
+      'disable' => array(
+        // list modules to disable ONLY
+      ),
+      'uninstall' => array(
+        // list modules to disable AND uninstall
+      ),
+      'enable' => array(
+        // core modules to enable
+      ),
+    ),
+    'blocks' => array(
+      'hide' => array(
+        // list core blocks to disable using its $delta
+      ),
+    ),
+    'content_types' => array(
+      'delete' => array(
+        // machine names of content types to delete
+      )
+    ),
+    'variables' => array(
+      // list of variables to set, in the form of $variable_name => $value
+    ),
+  )
+
+*/
+  $adjustments = array(
+    'minimal' => array(
+      'modules' => array(
+        'enable' => array(
+          'contextual',
+          'field_ui',
+          'file',
+          'image',
+          'list',
+          'menu',
+          'options',
+          'path'
+        ),
+      ),
+      'blocks' => array(
+        'hide' => array(
+          'management',
+          'navigation',
+          'login'
+        ),
+      ),
+      'variables' => array(
+        'admin_theme' => 'seven',
+        'node_admin_theme' => 1,
+        'user_register' => 0
+      ),
+    ),
+    'pantheon' => array(
+      'modules' => array(
+        'uninstall' => array(
+          'color',
+          'comment',
+          'overlay',
+          'search',
+          'shortcut',
+          'toolbar'
+        ),
+      ),
+      'blocks' => array(
+        'hide' => array(
+          'powered-by',
+          'navigation',
+          'login'
+        )
+      ),
+      'content_types' => array(
+        'delete' => array('article')
+      ),
+      'variables' => array(
+        'admin_theme' => 'seven',
+        'node_admin_theme' => 1,
+        'user_register' => 0
+      ),
+    )
+  );
+
+  return $adjustments[$profile];
+}
+
+
+/* ===================
+ * Installer functions
+ * =================== */
+
+/**
+ * Enable or disable core modules based on its installation profile.
+ * @param  string $profile the site's current installation profile
+ * @return void
+ */
+function ak_utils_adjust_install_profile($profile) {
+  $adjustments = _ak_utils_install_adjustments($profile);
+  if (!empty($adjustments['modules']['disable'])) {
+    module_disable($adjustments['modules']['disable']);
+  }
+  if ($adjustments['modules']['uninstall']) {
+    module_disable($adjustments['modules']['uninstall']);
+    drupal_uninstall_modules($adjustments['modules']['uninstall']);
+  }
+  if ($adjustments['blocks']['hide']) {
+    _ak_utils_disable_blocks($adjustments['blocks']['hide']);
+  }
+  if ($adjustments['content_types']['delete']) {
+    _ak_utils_delete_content_types($adjustments['content_types']['delete']);
+  }
+  if ($adjustments['variables']) {
+    _ak_utils_set_variables($adjustments['variables']);
+  }
+}
+
+
+/* =========================
+ * Internal helper functions
+ * ========================= */
+
+/**
+ * Helper function to programatically disable blocks
+ * @param  array $blocks an array of block deltas
+ * @return void
+ */
+function _ak_utils_disable_blocks($blocks) {
+  foreach ($blocks as $delta) {
+    $block = db_update('block')
+    ->fields(array(
+      'region' => -1,
+      'status' => 0
+    ))
+    ->condition('delta', $delta)
+    ->execute();
+  }
+}
+
+/**
+ * Helper function to programatically delete content types
+ * @param  array $content_types an array of content type machine names
+ * @return void
+ */
+function _ak_utils_delete_content_types($content_types) {
+  foreach ($content_types as $type) {
+    node_type_delete($type);
+  }
+}
+
+/**
+ * Helper function to set an array of variables
+ * @param  array $variables an array of variables to set
+ * @return void
+ */
+function _ak_utils_set_variables($variables) {
+  foreach ($variables as $key => $value) {
+    variable_set($key, $value);
+  }
+}

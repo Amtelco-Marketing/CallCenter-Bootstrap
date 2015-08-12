@@ -1,0 +1,5 @@
+name = "My utilities"
+description = "Helper functions and other utilities used across projects."
+package = "akalata"
+core = 7.x
+version = 7.x-1.0

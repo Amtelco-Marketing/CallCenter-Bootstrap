@@ -1,0 +1,13 @@
+{
+  "name": "bootstrap_callcenter",
+  "version": "1.0.0",
+  "author": "Lisa Gurza",
+  "homepage": "http://callcenter.amtelco.com",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-compass": "^1.0.3",
+    "grunt-contrib-sass": "^0.9.2",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}

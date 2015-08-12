@@ -1,0 +1,118 @@
+.entity-row {
+  padding-top: $region-padding-top;
+  padding-bottom: $region-padding-bottom;
+  &.text-light {
+    color: white;
+    h1, h2, h3, h4, h5, h6 {color: white;}
+    .btn {
+      border-color: white;
+      background: $accent-blue;
+      color: white;
+      &:hover {
+        background: white;
+        color: $accent-blue;
+      }
+    }
+    blockquote {
+      &:before {background-image: url(../images/white_quote_left.png);}
+      &:after {background-image: url(../images/white_quote_right.png);}
+    }
+  }
+  &.row-video {
+    text-align: center;
+  }
+}
+
+.row-section-header {
+  text-align: center;
+  h2 {
+    text-transform: uppercase;
+    @extend %headline-border;
+    padding-top: 0.444em; // add a bit more space in place of the margin
+  }
+}
+
+.row-content-columns,
+.row-content-columns-image {
+  .field-item {
+    @extend .col-xs-12;
+    h4 {
+      text-align: center;
+      @extend %headline-separator;
+    }
+  }
+  .column-count-1 {
+    .field-item {
+      @extend .col-md-12;
+    }
+  }
+  .column-count-2 {
+    .field-item {
+      @extend .col-md-6;
+    }
+  }
+  .column-count-3 {
+    .field-item {
+      @extend .col-md-4;
+    }
+  }
+  .column-count-4 {
+    .field-item {
+      @extend .col-md-3;
+    }
+  }
+  .column-count-6 {
+    .field-item {
+      @extend .col-md-2;
+    }
+  }  
+}
+
+.row-image-text,
+.row-product-content,
+.row-product-teaser {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .field-name-field-row-text {
+    padding-top: $region-padding-top;
+    padding-bottom: $region-padding-bottom;
+  }
+
+  .faux-field-cta-button {
+    padding-bottom: $region-padding-bottom;
+  }
+
+  &.image-position-left {
+    .field-name-field-row-image {
+      @extend .col-xs-12;
+      @extend .col-sm-6;
+      @extend .col-md-4;
+    }
+    .row-content {
+      @extend .col-sm-6;
+      @extend .col-md-8;
+    }
+  }
+  &.image-position-right {
+    .field-name-field-row-image {
+      @extend .col-sm-6;
+      @extend .col-sm-push-6;
+      @extend .col-md-4;
+      @extend .col-md-push-8;
+    }
+    .row-content {
+      @extend .col-sm-6;
+      @extend .col-sm-pull-6;
+      @extend .col-md-8;
+      @extend .col-md-pull-4;
+    }
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  .field-name-field-row-image {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}

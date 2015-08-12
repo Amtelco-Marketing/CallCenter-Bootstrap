@@ -1,0 +1,37 @@
+/**
+ * @file
+ * Styles are organized using Hugo Giraudel's Sass Guidelines.
+ * @see http://sass-guidelin.es/
+ */
+
+// First, import variables to override vendor defaults
+@import "utils/variables";
+
+// Keeping the bootstrap manifest separatley allows us to override the core
+// library if needed, while maintaining upgradability
+@import 'base/drupal-reset.scss';
+@import 'base/bootstrap.scss';
+
+// Utils
+@import "utils/mixins";
+
+//Layouts
+@import "layout/grid";
+@import "layout/header";
+@import "layout/main";
+@import "layout/footer";
+@import "layout/forms";
+@import "layout/navigation";
+@import "layout/stickyfooter";
+
+// Components
+@import "components/admin";
+@import "components/banner";
+@import "components/buttons";
+@import "components/nodes";
+@import "components/rows";
+@import "components/views";
+
+
+
+

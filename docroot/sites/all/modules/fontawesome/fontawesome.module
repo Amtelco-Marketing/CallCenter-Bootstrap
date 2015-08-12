@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Defines the FontAwesome library for use as a dependency with other modules/themes.
+ */
+
+/**
+ * Implements hook_libraries_info().
+ */
+function fontawesome_libraries_info() {
+  $libraries = array();
+  $libraries['fontawesome'] = array(
+    'name' => 'FontAwesome',
+    'vendor url' => 'http://fortawesome.github.io/Font-Awesome/',
+    'download url' => 'http://fortawesome.github.io/Font-Awesome/assets/font-awesome-4.1.0.zip',
+    'version' => '4.1.0',
+    'files' => array(
+      'css' => array(
+        'css/font-awesome.min.css' =>  array(
+          'media' => 'all',
+        )
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function fontawesome_preprocess_page(&$variables, $hook) {
+  // Load the Fontawesome library via the Libraries API
+  // Example from http://cgit.drupalcode.org/tweme/tree/template.php?id=8921d3247c9bc7912cac2b46325f4f7959259f95
+  $loaded = FALSE;
+  if (module_exists('libraries')) {
+    if (libraries_detect('fontawesome')) {
+      // Try to load the library.
+      $loaded = libraries_load('fontawesome');
+    }
+    if (!$loaded) {
+      // Otherwise try to load the library manually by path.
+      $bootstrap_path = libraries_get_path('fontawesome');
+      if ($bootstrap_path) {
+        drupal_add_css($bootstrap_path . 'css/font-awesome.min.css', array('media' => 'all'));
+        $loaded = TRUE;
+      }
+    }
+  }
+  if (!$loaded) {
+    // Notify a user if Bootstrap library was not found.
+    drupal_set_message(t('The FontAwesome iconfont CSS library could not be found or loaded.'), 'error');
+  }
+}

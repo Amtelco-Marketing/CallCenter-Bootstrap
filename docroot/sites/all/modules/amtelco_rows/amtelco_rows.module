@@ -1,0 +1,136 @@
+<?php
+/**
+ * @file
+ * Code for the Rows feature.
+ */
+
+include_once 'amtelco_rows.features.inc';
+
+/**
+ * Implements template_preprocess_entity()
+ */
+function amtelco_rows_preprocess_entity(&$variables, $hook) {
+  // Optionally, generate entity-type-specific preprocess functions
+  if (isset($variables['elements']['#entity_type'])) {
+    $function = __FUNCTION__ . '__' . $variables['elements']['#entity_type'];
+    if (function_exists($function)) {
+      $function($variables, $hook);
+    }
+  }
+}
+
+function amtelco_rows_preprocess_entity__row(&$variables, $hook) {
+  $row = $variables['row'];
+  $row_wrapper = entity_metadata_wrapper('row', $row);
+
+  // Remove classes from classes_array
+  $remove_classes = array('contextual-links-region');
+  foreach ($remove_classes as $class) {
+    $key = array_search($class, $variables['classes_array']);
+    if ($key) {
+      unset($variables['classes_array'][$key]);
+    }
+  }
+
+  // Hide the title if option is provided
+  $variables['hide_title'] = FALSE;
+  if (ak_utils_emw_field_check($row_wrapper, 'field_row_title')) {
+    $row_title = $row_wrapper->field_row_title->value();
+    if (count($row_title) > 0) {
+      $variables['hide_title'] = $row_title[0];
+    }
+  }
+
+  // Apply row color, if set
+  if (ak_utils_emw_field_check($row_wrapper, 'field_row_color')) {
+    $row_color = $row_wrapper->field_row_color->value();
+    $variables['attributes_array']['style'] = 'background: ' . $row_color['rgb'];
+    // Keep a list of hex values where the text should be lighter default
+    if (in_array($row_color['rgb'], array('#3480DE'))) {
+      $variables['classes_array'][] = 'text-light';
+    }
+    if (in_array($row_color['rgb'], array('#3480DE', '#EBEBEB'))) {
+      $variables['classes_array'][] = 'border-light';
+    }
+  }
+
+  // Apply image position class, if set
+  if (ak_utils_emw_field_check($row_wrapper, 'field_image_position')) {
+    $image_position = $row_wrapper->field_image_position->value();
+    $variables['classes_array'][] = 'image-position-' . $image_position;
+  }
+
+  // Add pre-composed CTA, if possible
+  if (ak_utils_emw_field_check($row_wrapper, 'field_product_reference') && ak_utils_emw_field_check($row_wrapper, 'field_cta_button_text')) {
+    $text = $row_wrapper->field_cta_button_text->value();
+    $reference = $row_wrapper->field_product_reference->value();
+    $variables['content']['cta_button'] = array(
+      '#markup' => l($text, 'node/' . $reference->nid, array('attributes' => array('class' => array('btn btn-default')))),
+      '#weight' => 10,
+      '#prefix' => '<div class="field faux-field faux-field-cta-button">',
+      '#suffix' => '</div>'
+    );
+    unset($variables['content']['field_product_reference']);
+    unset($variables['content']['field_cta_button_text']);
+  }
+}
+
+/**
+ * Implements template_preprocess_field()
+ */
+function amtelco_rows_preprocess_field(&$variables, $hook) {
+  switch ($variables['element']['#field_name']) {
+    case 'field_content_columns':
+      // Add number of items (text columns) as a class
+      $count = count($variables['items']);
+      $variables['classes_array'][] = 'column-count-' . $count;
+
+      break;
+
+    case 'field_row_image':
+      $row = $variables['element']['#object'];
+      $row_wrapper = entity_metadata_wrapper('row', $row);
+
+      // Add image offsets as inline styles
+      $image_offset_top = 0;
+      if (ak_utils_emw_field_check($row_wrapper, 'field_image_offset_top')) {
+        $image_offset_top = $row_wrapper->field_image_offset_top->value();
+      }
+      $image_offset_bottom = 0;
+      if (ak_utils_emw_field_check($row_wrapper, 'field_image_offset_bottom')) {
+        $image_offset_bottom = $row_wrapper->field_image_offset_bottom->value();
+      }
+      $variables['attributes_array']['style'] = 'margin-top: ' . $image_offset_top . 'px; margin-bottom: ' . $image_offset_bottom . 'px;';
+
+      // Add image link if provided
+      if (ak_utils_emw_field_check($row_wrapper, 'field_image_link')) {
+        $image_link = $row_wrapper->field_image_link->value();
+        $url = $image_link['url'];
+        $variables['items'][0]['#path'] = array('path' => $url, 'options' => array());
+      }
+
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme()
+ */
+function amtelco_rows_theme($existing, $type, $theme, $path) {
+  return array(
+    /* Entity templates */
+    'row' => array(
+      'variables' => array('element' => null),
+      'template' => 'theme/row',
+    ),
+    /* Field templates */
+    'field__field_rows' => array(
+      'variables' => array('element' => null),
+      'template' => 'theme/field--field-rows',
+    ),
+    'field__field_body__row_text' => array(
+      'variables' => array('element' => null),
+      'template' => 'theme/field--field-body--row-text',
+    ),
+  );
+}

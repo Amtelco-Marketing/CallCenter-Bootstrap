@@ -1,0 +1,60 @@
+
+#page {
+  &.no-banner {
+    #header {border-bottom: 1px solid #dbdbdb;}
+    .main-container {
+      .page-title-header {
+        background: $accent-blog-dark url('../images/pattern_dark_blue.jpg') 0 0 repeat;
+        color: white;
+        a {color: white;}
+        .btn-default {
+          color: #8b8b8b;
+          text-align: left;
+          margin-top: 11px;
+          .caret {
+            border-top-color: #333;
+            border-top-width: 6px;
+            border-left-width: 5px;
+            border-right-width: 5px;
+            position: absolute;
+            right: 10px;
+            top: 13px;
+          }
+        }
+        .dropdown-menu a {color: #333;}
+        padding: ($line-height-computed / 2) 0;
+        .page-header {
+          @extend .col-md-8;
+          margin: 0;
+          padding: 0;
+          padding-top: 5px;
+          border-bottom-width: 0;
+        }
+      }
+    }
+  }
+}
+
+.page-admin,
+.page-node-done,
+.page-sitemap {
+  .region-content {
+    @extend .container;
+    margin-top: $line-height-computed * 2;
+    margin-bottom: $line-height-computed * 2;
+  }
+}
+
+.main-container {
+  .profile,
+  .webform-client-form,
+  .view-display-id-page,
+  .node-blog-post.node-full {
+    margin-bottom: $line-height-computed * 2;
+  }
+  .page-header {
+    float: left;
+    padding-bottom: 0;
+  }
+}
+

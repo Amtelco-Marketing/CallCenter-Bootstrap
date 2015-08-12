@@ -1,0 +1,77 @@
+.navbar-toggle {
+  font-size: 1.5em;
+  margin: $line-height-computed $line-height-computed 0 0;
+  @media (max-width: $screen-xs-max) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  span {
+    margin-left: 0.5em;
+    @extend .hidden-xs;
+  }
+}
+
+.region-search {
+  @extend .col-xs-12;
+  @extend .col-lg-3;
+}
+
+@media (max-width: $screen-xs-max) {
+  .logo {padding-left: $grid-gutter-width;}
+}
+
+
+#header {background: rgba(white, 0.92);}
+
+// Might be adapted to be non-mobile only?
+  #header {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+
+    .logo-small {
+      display: none;
+      visible: hidden;
+    }
+
+    &.scrolled {
+      @media (min-width: $screen-lg-min) {
+        .region-search {
+          display: none;
+          visibility: hidden;
+        }
+      }
+      .logo {
+        margin-top: 0.75em;
+        margin-bottom: 0.75em;
+      }
+      .logo-normal {
+        display: none;
+        visibility: hidden;
+      }
+      .logo-small {
+        display: block;
+        visibility: visible;
+      }
+      .navbar-toggle {
+        font-size: 1em;
+        margin: 0.75em 0.75em 0.75em 0;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+    }
+
+    .region-search,
+    ul.secondary {
+      float: right;
+    }
+    .region-search {
+      margin-top: ($line-height-computed / 2);
+    }
+  }
+
+  .navbar-header {
+    position: relative;
+    z-index: 100;
+  }
+

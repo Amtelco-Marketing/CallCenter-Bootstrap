@@ -1,0 +1,84 @@
+/*
+ * Revert default FontAwesome styles, and apply only to the :before element
+ * Use when you want to show both the icon and text
+ */
+%fa-revert {
+  font-family: inherit;
+  line-height: inherit;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+
+  &:before {
+    font-family: "FontAwesome";
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/**
+ * Headline border (full width of content)
+ */
+%headline-border {
+  display: inline-block;
+  margin: 0; // since display: inline[-block] makes it useless anyway
+  border-bottom: 1px solid $accent-orange;
+}
+
+/**
+ * Headline separator (fixed width between headline and text)
+ */
+%headline-separator {
+  &:after {
+    content: ' ';
+    display: block;
+    width: 4.5em;
+    border-bottom: 1px solid $accent-orange;
+    margin-top: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/**
+ * Extended button styles
+ */
+%button {
+  font-size: 0.75em;
+  padding: 0.5em 0.8333em;
+  line-height: 3em;
+  color: $accent-blue;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  border: 4px solid $accent-blue;
+  border-radius: 3px;
+  background: white;
+
+  &:hover {
+    background: $accent-blue;
+    color: white;
+    border-color: $accent-blue;
+  }
+}
+
+/*
+ * Hide text and show fa-icon only
+ */
+@mixin fa-hide-text($size: 3em) {
+  text-indent: -999em;
+  overflow: hidden;
+  padding-left: 0;
+  padding-right: 0;
+  width: $size;
+  height: $size;
+  line-height: $size;
+  display: block;
+  &:before {
+    font-size: ($size / 2);
+    text-indent: 0;
+    float: left;
+    width: 100%;
+    text-align: center;
+  }
+}

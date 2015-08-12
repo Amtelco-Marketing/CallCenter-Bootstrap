@@ -1,0 +1,68 @@
+
+/**
+ * Colors
+ */
+$accent-blue: #407fc3;
+$accent-dark-blue: #001540;
+$accent-gray: #EBEBEB;
+$accent-orange: #FF9500;
+$accent-light-gray: #f2f2f2;
+
+$accent-cool-gray: #626262;
+
+$accent-blog-dark: #0e2048;
+$accent-blog-bright: #2d78e1;
+
+$clarabridge_dark: #003668;
+$clarabridge_med: #2760a7;
+$clarabridge_bright: #3480de;
+
+/**
+ * Bootstrap overrides
+ */
+// Colors
+$brand-primary: $accent-blue;
+$text-color: #838383;
+$page-header-border-color: $accent-orange;
+// Typography
+$font-family-sans-serif: "Roboto", sans-serif;
+$font-family-serif: "Roboto Slab", serif;
+$font-size-base: 16px;
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        1.4; // 23/14
+$line-height-computed:    floor(($font-size-base * $line-height-base));
+
+$headings-font-family: "Roboto Slab", serif;
+$headings-line-height: $line-height-base;
+
+$bold: 700;
+
+$font-size-h1:            floor(($font-size-base * 2.643)); // ~37px
+$font-size-h2:            floor(($font-size-base * 2.25)); // ~36px
+$font-size-h3:            ceil(($font-size-base * 1.425)); // ~23px
+$font-size-h4:            ceil(($font-size-base * 1.25)); // ~20px
+$font-size-h5:            ceil(($font-size-base * 2)); // ~32px
+$font-size-h6:            $font-size-base;
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        1.6429; // 23/14
+$line-height-computed:    floor(($font-size-base * $line-height-base));
+
+// Layout
+$grid-gutter-width: 20px;
+$container-large-desktop: (1180px + $grid-gutter-width);
+
+// Navigation
+$screen-lg-min: 1200px; // Default from bootstrap's variables
+$grid-float-breakpoint: $screen-lg-min;
+$navbar-default-color:    $text-color;
+$navbar-default-bg:       transparent;
+$navbar-default-border:   transparent;
+
+/**
+ * Custom variables
+ */
+// Set consistent top/bottom padding for horizontal regions
+$region-padding-top:    1em;
+$region-padding-bottom: 1.5em;

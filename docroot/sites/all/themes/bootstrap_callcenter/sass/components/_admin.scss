@@ -1,0 +1,23 @@
+#block-system-main {
+  > form,
+  > .profile {
+    @extend .container;
+
+    &#user-login > div {
+      @extend .col-md-6;
+      margin-bottom: $line-height-computed * 2;
+    }
+  }
+}
+
+#admin-menu {
+  @extend .hidden-xs;
+  @extend .hidden-sm;
+}
+
+.admin-menu #header {top: 29px;}
+
+@media (max-width: $screen-sm-max ) {
+  html body.admin-menu {margin-top: 0 !important;}
+  .admin-menu #header {top: 0;}
+}

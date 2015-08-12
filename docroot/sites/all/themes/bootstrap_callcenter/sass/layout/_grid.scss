@@ -1,0 +1,54 @@
+// All horizontal regions should be cleared by default
+#header,
+nav.navbar,
+#main,
+#footer {
+  clear: both;
+}
+
+// All grided elements should be full-width by default
+#content,
+.region-sidebar-first,
+.region-sidebar-second {
+  @extend .col-xs-12;
+}
+
+#content {
+  @extend .col-md-12;
+}
+
+.sidebar-first {
+  #content {
+    @extend .col-md-9;
+    @extend .col-md-push-3;
+  }
+
+  .region-sidebar-first {
+    @extend .col-md-3;
+    @extend .col-md-pull-9;
+  }
+}
+
+.sidebar-second {
+  #content {
+    @extend .col-md-10;
+  }
+
+  .region-sidebar-second {
+    @extend .col-md-2;
+  }
+}
+
+.two-sidebars {
+  #content {
+    @extend .col-md-7;
+    @extend .col-md-push-3;
+  }
+  .region-sidebar-first {
+    @extend .col-md-3;
+    @extend .col-md-pull-7;
+  }
+  .region-sidebar-second {
+    @extend .col-md-2;
+  }
+}

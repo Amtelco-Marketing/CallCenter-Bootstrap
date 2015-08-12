@@ -1,0 +1,34 @@
+
+.block ul {padding: 0;}
+
+.banner-row-image,
+/*.views-field*/ {
+  img:not(.file-icon) {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.tabs--primary {
+  margin: $line-height-computed 0;
+}
+
+.breadcrumb {
+  background: none;
+  padding: 0;
+  margin-top: $line-height-computed;
+  .nolink {
+    cursor: inherit;
+    color: inherit;
+    &:hover {text-decoration: none; color: inherit;}
+  }
+  > li + li:before {
+    content: "> ";
+    padding: 0 5px;
+  }
+}
+
+.list-inline {
+  margin-left: 0;
+}

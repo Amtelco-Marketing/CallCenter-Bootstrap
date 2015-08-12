@@ -1,0 +1,68 @@
+name = Bootstrap Call Center Theme
+description = A Bootstrap Sub-theme for Call Center site.
+core = 7.x
+base theme = bootstrap
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Regions
+;;;;;;;;;;;;;;;;;;;;;
+regions[search]         = 'Search'
+regions[help]           = 'Help'
+regions[title_bar]     = 'Title Bar'
+regions[content]        = 'Content'
+regions[footer_top]     = 'Footer top'
+regions[footer]         = 'Footer main'
+regions[footer_bottom]  = 'Footer bottom'
+;; Utility Regions
+regions[page_top]       = 'Page top'
+regions[page_bottom]    = 'Page bottom'
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Stylesheets
+;;;;;;;;;;;;;;;;;;;;;
+
+stylesheets[all][] = css/bootstrap-select.min.css
+stylesheets[all][] = css/style.css
+
+
+; For information on choosing the desired method, please read the Drupal
+; Bootstrap sub-theme "how-to" documentation:
+; https://drupal.org/node/1978010
+
+; ;----------------------------------
+; ; METHOD 1: Bootstrap Source Files
+; ;----------------------------------
+; 
+; ;;;;;;;;;;;;;;;;;;;;;
+; ;; Scripts
+; ;;;;;;;;;;;;;;;;;;;;;
+
+scripts[] = js/bootstrap-select.min.js
+; scripts[] = js/jquery.fitvids.js
+scripts[] = js/tmap_header.js 
+
+; scripts[] = 'js/bootstrap/affix.js'
+; scripts[] = 'js/bootstrap/alert.js'
+scripts[] = 'js/bootstrap/button.js'
+; scripts[] = 'js/bootstrap/carousel.js'
+scripts[] = 'js/bootstrap/collapse.js'
+scripts[] = 'js/bootstrap/dropdown.js'
+; scripts[] = 'js/bootstrap/modal.js'
+; scripts[] = 'js/bootstrap/tooltip.js'
+; scripts[] = 'js/bootstrap/popover.js'
+; scripts[] = 'js/bootstrap/scrollspy.js'
+scripts[] = 'js/bootstrap/tab.js'
+; scripts[] = 'js/bootstrap/transition.js'
+;
+; ; Disable BootstrapCDN if using Bootstrap source files in your sub-theme.
+; settings[bootstrap_cdn] = ''
+
+
+; ;-------------------------
+; ; METHOD 2: Bootstrap CDN
+; ;-------------------------
+;
+; Method 2 uses BootstrapCDN, the only thing you might need to provide here
+; is overrides to Bootstrap theme settings. Copy them here from the base theme
+; to override.

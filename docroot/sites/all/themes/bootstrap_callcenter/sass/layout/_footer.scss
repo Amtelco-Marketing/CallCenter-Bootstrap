@@ -1,0 +1,95 @@
+
+.footer {
+  margin-top: 0;
+  border-top-width: 0;
+  padding: 0;
+  color: white;
+  a {
+    color: white;
+    &:hover {text-decoration: none;}
+  }
+  h1, h2, h3, h4 {
+    color: white;
+  }
+  h4 {
+    font-weight: $bold;
+  }
+  p {
+    margin: 0;
+  }
+  @media (max-width: $screen-xs-max) {
+    .block + .block {
+      margin-top: 1em;
+    }
+  }
+}
+
+#footer-top {
+  background: $clarabridge_dark;
+  font-size: 0.875em;
+  line-height: 1em;
+  padding: 1em 0;
+  text-align: center;
+  .block,
+  .menu,
+  .menu li {
+    display: inline-block;
+  }
+  .menu {
+    margin: 0;
+    text-transform: uppercase;
+    li {
+      border-left: 1px solid white;
+      padding: 0 0.5em 0 0.75em;
+      &.first {border-left-width: 0;}
+    }
+  }
+}
+
+#footer-main {
+  background: $clarabridge_med;
+  padding: 4em 0;
+  .block {
+    @extend .col-sm-4;
+    @extend .col-sm-push-3;
+    &:first-child {
+    }
+    &:last-child {
+      .menu {
+        margin-bottom: 0;
+        font-size: 1.125em;
+        font-weight: bold;
+        line-height: 1.85em;
+      }
+    }
+    @media (min-width: $screen-sm-min) {
+      &:last-child {
+        border-left: 1px solid white;
+        .menu {
+          padding-left: 0.5em;
+        }
+      }
+    }
+  }
+}
+
+#footer-bottom {
+  background: $clarabridge_bright;
+  text-align: center;
+  .menu li {
+    display: inline-block;
+    margin: 0 1.5em;
+    a {
+      background: white;
+      border-radius: 50%;
+      height: 2.5em;
+      width: 2.5em;
+      display: block;
+      &.fa {
+        color: $clarabridge_bright;
+        line-height: 2.5em;
+      }
+    }
+  }
+}
+
